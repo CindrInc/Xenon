@@ -1,4 +1,5 @@
 import os
+
 from Crypto.Hash import SHA256
 from Crypto.Cipher import AES 
 from Crypto import Random
@@ -28,9 +29,10 @@ def encrypt (key, fileName):
 def decrypt (key, fileName):
   chunksize = 64 * 1024
   outputFile = fileName[11:]
-  IV = Random.new().read(16)  
+  
   with open(fileName,'rb') as infile:
       filesize = int(infile.read(16))
+      IV = infile.read(16)
       decryptor = AES.new(key, AES.MODE_CBC, IV)
       with open(fileName, 'wb') as outfile:
          while True:
