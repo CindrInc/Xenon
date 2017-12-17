@@ -1,8 +1,11 @@
 import os
-
+from secrets import SystemRandom, token_hex, compare_digests
 from Crypto.Hash import SHA256
 from Crypto.Cipher import AES 
 from Crypto import Random
+
+
+
 
 def encrypt (key, fileName):
   chunksize = 64 *1024 #chunks it reads out of the file
