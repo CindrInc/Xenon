@@ -6,25 +6,33 @@ from Crypto import Random
 
 def compareStringsWithoutCryptography(username1, username2):
   if(username1 == username2):
-    print ("True")
     return True
-  else: 
-    print("False")
+  else:  
     return False
 
 def compareStrings(tokenOne, tokenTwo):
   if compare_digest(tokenOne, tokenTwo):
-    print ("True")
+    return True
   else:
-    print ("Verification error")
+    return False
 
 
 def hashFunction(password):
   s = SHA256.new(password.encode('utf-16'))
   return s.digest()
 
-storedUsername = input("Create your username")
+storedUsername = input("Create your username: ")
 storedPassword = input("Create your first password: ")
-username = ("Enter your username")
+username = input("Enter your username: ")
 pwd2 = input("Enter your password: ")
-compareStrings(hashFunction(pwd2), hashFunction(storedPassword))
+a = compareStringsWithoutCryptography(storedUsername, username)
+b = compareStrings(hashFunction(pwd2), hashFunction(storedPassword))
+
+if (bool(a) == False):
+  print("Verification Errror")
+elif (bool(b) == False):
+  print("Verification Errror")
+
+elif(bool(b) == True and bool(a) == True ):
+  print("Authentification successful, welcome " + storedUsername)
+  
